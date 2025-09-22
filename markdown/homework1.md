@@ -14,7 +14,7 @@ E(\hat{\mu}_i) &= \mu_i
 \end{aligned} 
 $$
 
-The sample mean, $E(\hat{\mu}_i)$ is an unbiased estimator of poulation mean, $\mu_i$, so it is an appropriate estimator. 
+The sample mean, $E(\hat{\mu}_i)$ is an unbiased estimator of poulation mean, $\mu_i$, it is also a **consistent estimator** by the Law of Large Numbers, because of the consistency and unbiasedness, it is an appropriate estimator. 
 
 
 The sample covariance matrix $\hat{\Sigma}_{ij} = \frac{1}{n}\sum_{t=1}^{n}(X_{ti} - \hat{\mu}_i)(X_{tj} - \hat{\mu}_j)$ is appropriate because:
@@ -27,7 +27,6 @@ E[\hat{\Sigma}_{ij}] &= E\left[\frac{1}{n}\sum_{t=1}^{n}(X_{ti} - \hat{\mu}_i)(X
 &= \Sigma_{ij}
 \end{align}$$
 
-Therefore $E[\hat{\Sigma}] = \Sigma$, making it an **unbiased estimator** of the true covariance matrix.
 
 Additionally, by the **Law of Large Numbers**, as $n \to \infty$:
 $$\hat{\Sigma}_{ij} \to \Sigma_{ij} \text{ (convergence in probability)}$$
@@ -54,14 +53,25 @@ $$
 $$
 \begin{aligned}
 \hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li} - \hat{\mu}_i)(\hat{X}_{lj} - \hat{\mu}_j) \\
-\hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li}\hat{X}_{lj}) - (\hat{\mu}_i\hat{X}_{lj}) - (\hat{\mu}_j\hat{X}_{li}) - (\hat{\mu}_i\hat{\mu}_j) \\
-\hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li}\hat{X}_{lj}) - \frac{1}{n}\sum_{l=1}^n(\hat{\mu}_i\hat{X}_{lj}) - \frac{1}{n}\sum_{l=1}^n(\hat{\mu}_j\hat{X}_{li}) - \frac{1}{n}\sum_{l=1}^n(\hat{\mu}_i\hat{\mu}_j) \\
-\hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li}\hat{X}_{lj}) - (\hat{\mu}_i\hat{\mu}_j) - (\hat{\mu}_j\hat{\mu}_i) - (\hat{\mu}_i\hat{\mu}_j) \\
+\hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li}\hat{X}_{lj}) - (\hat{\mu}_i\hat{X}_{lj}) - (\hat{\mu}_j\hat{X}_{li}) + (\hat{\mu}_i\hat{\mu}_j) \\
+\hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li}\hat{X}_{lj}) - \frac{1}{n}\sum_{l=1}^n(\hat{\mu}_i\hat{X}_{lj}) - \frac{1}{n}\sum_{l=1}^n(\hat{\mu}_j\hat{X}_{li}) + \frac{1}{n}\sum_{l=1}^n(\hat{\mu}_i\hat{\mu}_j) \\
+\hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li}\hat{X}_{lj}) - (\hat{\mu}_i\hat{\mu}_j) - (\hat{\mu}_j\hat{\mu}_i) + (\hat{\mu}_i\hat{\mu}_j) \\
 \hat{\Sigma}_{ij} &= \frac{1}{n}\sum_{l=1}^n(\hat{X}_{li}\hat{X}_{lj})- (\hat{\mu}_j\hat{\mu}_i) \\
-\hat{\Sigma} &= \frac{1}{n}\hat{X}^T\hat{X}- (\hat{\mu}^T\hat{\mu}) \\
-\hat{\Sigma} &= \frac{1}{n}(\hat{X}^T-1\hat{\mu}^T)(\hat{X}-1\hat{\mu}^T)  \\
+\hat{\Sigma} &= \frac{1}{n}\hat{X}^T\hat{X}- (\hat{\mu}\hat{\mu}^T) \\
 \end{aligned}
 $$
+
+$$
+\begin{aligned}
+\hat{\Sigma} &= \frac{1}{n}[(\hat{X}-\mathbf{1}\hat{\mu}^T)^T(\hat{X}-\mathbf{1}\hat{\mu}^T)] \\
+\hat{\Sigma} &= \frac{1}{n}[(\hat{X}^T - \hat{\mu}\mathbf{1}^T)(\hat{X}-\mathbf{1}\hat{\mu}^T)] \\
+\hat{\Sigma} &= \frac{1}{n}[\hat{X}^T\hat{X} - \hat{X}^T(\mathbf{1}\hat{\mu}^T) - (\hat{\mu}\mathbf{1}^T)\hat{X} + (\hat{\mu}\mathbf{1}^T)(\mathbf{1}\hat{\mu}^T)] \\
+\hat{\Sigma} &= \frac{1}{n}[\hat{X}^T\hat{X} - n\hat{\mu}\hat{\mu}^T - n\hat{\mu}\hat{\mu}^T + n\hat{\mu}\hat{\mu}^T] \\
+\hat{\Sigma} &= \frac{1}{n}[\hat{X}^T\hat{X} - n\hat{\mu}\hat{\mu}^T] \\
+\hat{\Sigma} &= \frac{1}{n}\hat{X}^T\hat{X} - \hat{\mu}\hat{\mu}^T
+\end{aligned}
+$$
+
 
 <div style="page-break-after: always;"></div>
 
