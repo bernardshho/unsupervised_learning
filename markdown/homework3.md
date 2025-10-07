@@ -1,5 +1,67 @@
 ## Homework 3.
 
+### Question 1. 
+
+**(a) Find $ P(W_2 \geq c) $**
+$$
+\begin{align*}
+W_2 &= \max(0, V_1 - T_2) \\
+\\
+P(W_2 \geq c) &= 1 - P(W_2 < c) \\
+&= 1 - P(\max(0, V_1 - T_2) < c) \\
+&= 1 - P(V_1 - T_2 < c) \\
+&= 1 - P(V_1 < T_2 + c) \\
+\\
+P(V_1 < T_2 + c) &= \int_0^\infty \int_0^{t_2 + c} \mu e^{-\mu v_1} \lambda e^{-\lambda t_2} \, dv_1 \, dt_2 \\
+\\
+\int_0^{t_2 + c} \mu e^{-\mu v_1} \, dv_1 &= \left[-e^{-\mu v_1}\right]_0^{t_2 + c} \\
+&= -e^{-\mu(t_2 + c)} + 1 \\
+&= 1 - e^{-\mu t_2} e^{-\mu c} \\
+\\
+P(V_1 < T_2 + c) &= \int_0^\infty \lambda e^{-\lambda t_2} \left(1 - e^{-\mu t_2} e^{-\mu c}\right) dt_2 \\
+&= \int_0^\infty \lambda e^{-\lambda t_2} \, dt_2 - e^{-\mu c} \int_0^\infty \lambda e^{-(\lambda + \mu) t_2} \, dt_2 \\
+\\
+\int_0^\infty \lambda e^{-\lambda t_2} \, dt_2 &= \left[-e^{-\lambda t_2}\right]_0^\infty = 1 \\
+\\
+\int_0^\infty \lambda e^{-(\lambda + \mu) t_2} \, dt_2 &= \left[\frac{-\lambda}{\lambda + \mu} e^{-(\lambda + \mu) t_2}\right]_0^\infty = \frac{\lambda}{\lambda + \mu} \\
+\\
+P(V_1 < T_2 + c) &= 1 - e^{-\mu c} \cdot \frac{\lambda}{\lambda + \mu} = 1 - \frac{\lambda}{\lambda + \mu} e^{-\mu c} \\
+\\
+P(W_2 \geq c) &= 1 - \left(1 - \frac{\lambda}{\lambda + \mu} e^{-\mu c}\right) \\
+&= \frac{\lambda}{\lambda + \mu} e^{-\mu c}
+\end{align*}
+$$
+
+
+**(b) Find $ P(W_3 \geq c) $**
+
+$$
+\begin{align*}
+W_3 &= \max(0, D_2 - A_3) \\
+\\
+D_2 &= V_2 + \max(A_2, D_1) \\
+&= V_2 + \max(A_1 + T_2, A_1 + V_1) \\
+&= V_2 + A_1 + \max(T_2, V_1) \\
+\\
+A_3 &= A_1 + T_2 + T_3 \\
+\\
+W_3 &= \max(0, V_2 + A_1 + \max(T_2, V_1) - A_1 - T_2 - T_3) \\
+&= \max(0, V_2 + \max(T_2, V_1) - T_2 - T_3) \\
+\\
+P(W_3 \geq c) &= P(V_2 + \max(T_2, V_1) - T_2 - T_3 \geq c) \\
+&= \int_0^\infty \int_0^\infty \int_0^\infty P(V_2 + \max(t_2, v_1) - t_2 - T_3 \geq c) \mu e^{-\mu v_1} \lambda e^{-\lambda t_2} \mu e^{-\mu v_2} \, dv_1 \, dt_2 \, dv_2 \\
+\\
+&= \int_0^\infty \int_0^\infty \int_0^\infty P(V_2 \geq c + t_2 + T_3 - \max(t_2, v_1)) \mu e^{-\mu v_1} \lambda e^{-\lambda t_2} \mu e^{-\mu v_2} \, dv_1 \, dt_2 \, dv_2 \\
+\\
+&= \int_0^\infty \int_0^{t_2} \int_{c + t_2 - t_2}^\infty \mu e^{-\mu v_2} \mu e^{-\mu v_1} \lambda e^{-\lambda t_2} \, dv_2 \, dv_1 \, dt_2 \\
+&\quad + \int_0^\infty \int_{t_2}^\infty \int_{c + t_2 - v_1}^\infty \mu e^{-\mu v_2} \mu e^{-\mu v_1} \lambda e^{-\lambda t_2} \, dv_2 \, dv_1 \, dt_2 \\
+\\
+P(W_3 \geq c) &= \int_0^\infty \int_0^{t_2} \int_c^\infty \mu \lambda \mu e^{-\mu v_2} e^{-\mu v_1} e^{-\lambda t_2} \, dv_2 \, dv_1 \, dt_2 \\
+&\quad + \int_0^\infty \int_{t_2}^\infty \int_{c + t_2 - v_1}^\infty \mu \lambda \mu e^{-\mu v_2} e^{-\mu v_1} e^{-\lambda t_2} \, dv_2 \, dv_1 \, dt_2
+\end{align*}
+$$
+
+
 ### Question 2.
 
 #### Solution to 2a.
@@ -29,6 +91,8 @@ $$f(x) = \frac{1}{(2\pi d_1)^{1/2}} \exp\left(-\frac{x_1^2}{2d_1}\right) \cdot \
 $$= \prod_{i=1}^p \frac{1}{\sqrt{2\pi d_i}} \exp\left(-\frac{x_i^2}{2d_i}\right)$$
 
 This shows that $X_1, X_2, \ldots, X_p$ are independent, with $X_i \sim \mathcal{N}(0, d_i)$.
+
+
 
 #### Solution to 2b.
 
@@ -96,6 +160,8 @@ $$Y = QX \sim \mathcal{N}(0, \Sigma)$$
 
 Therefore: $\boxed{QY \sim \mathcal{N}(0, \Sigma)}$, which means $X \sim QY$ where $X \sim \mathcal{N}(0, \Sigma)$.
 
+
+
 #### Solution to 2c. 
 
 
@@ -150,7 +216,7 @@ $$\sum_{i=1}^p c_i Y_i \sim \mathcal{N}\left(0, \sum_{i=1}^p c_i^2 \lambda_i\rig
 
 **6: Compute the variance**
 
-$$\sum_{i=1}^p c_i^2 \lambda_i = c^T D c = (Q^T w)^T D (Q^T w)$$
+$$\sum_{i=1}^p c_i^2 \lambda_i = c^T D c = (Q^T w)^T D (Q^T w)$$b
 
 $$= w^T Q D Q^T w = w^T \Sigma w$$
 
